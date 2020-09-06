@@ -1,0 +1,54 @@
+body {
+  background-color: #fff;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: local('Avenir'), url(../fonts/AvenirLTStd-Book.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Sofia Pro Regular';
+  src: local('Avenir'), url(../fonts/LucidaGrandeRegular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Sofia Pro Regular';
+  src: local('Sofia'), url(../fonts/SofiaProRegular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Sofia Pro Bold';
+  src: local('Sofia'), url(../fonts/SofiaProBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Sofia Pro Semi Bold';
+  src: local('Sofia'), url(../fonts/SofiaProSemiBold.ttf) format('truetype');
+}
+
+/* --------------------------------------------- */
+/* ------------- RESPONSIVE DESIGN ------------- */
+/* --------------------------------------------- */
+/* Extra small devices (phones, 600px and down)  */
+@media only screen and (max-width: 600px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}

@@ -1,0 +1,54 @@
+
+
+
+
+-- --
+SHOW DATABASES;
+
+-- --
+USE people;
+
+-- --
+SHOW TABLES;
+
+-- --
+SELECT * FROM carnet;
+
+-- To create table with increment id --
+CREATE TABLE people (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+nom VARCHAR(30) NOT NULL,
+prenom VARCHAR(30) NOT NULL,
+email VARCHAR(50),
+tel VARCHAR(50)
+)
+
+-- Edit column --
+ALTER TABLE carnet ADD nom varchar(40);
+ALTER TABLE carnet ADD id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY FIRST;
+ALTER TABLE carnet MODIFY id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY;
+
+-- Delete column --
+ALTER TABLE carnet DROP COLUMN nom;
+
+-- To get column names --
+SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='people' AND TABLE_NAME='carnet' ORDER BY ORDINAL_POSITION;
+
+-- To get everything about columns --
+SHOW COLUMNS FROM carnet;
+
+-- Delete contact with id --
+DELETE FROM carnet
+WHERE id = 2;
+
+-- To insert new contact --
+INSERT INTO `carnet`(column_1,column_2,...) VALUES (value_1,value_2,...);
+
+-- Move column --
+ALTER TABLE carnet MODIFY id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY AFTER nom;
+ALTER TABLE carnet MODIFY nom VARCHAR(30) AFTER id;
+
+-- Order by --
+SELECT * FROM carnet ORDER BY nom;
+SELECT * FROM carnet ORDER BY ORDINAL_POSITION;
+ALTER TABLE carnet ORDER BY nom;

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" type="text/css" href="../css/accueil.css">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Gestion de contacts" />
+  <meta property="og:locale" content="fr_BE" />
+  <meta property="og:type" content="Contacts manager" />
+  <meta property="og:title" content="Contacts" />
+  <meta property="og:description" content="Gestion de contacts">
+  <meta property="og:url" content="" />
+  <meta property="og:site_name" content="CONTACTS" />
+  <meta property="og:image" content="img/logo.png" />
+
+  <meta name="theme-color" content="#ffffff">
+  <title>Carnet d'adresses </title>
+
+</head>
+
+<body>
+
+  <%- include('navBar.ejs'); -%>
+
+  <main>
+
+
+    <h1>Accueil</h1>
+
+    <a href="/addContact">
+      <div class="logoAddContainer">
+        <img src="../img/add.png" alt="">
+      </div>
+    </a>
+
+    <div class="tableContainer">
+      <table>
+
+        <tr>
+          <% for (var i = 1; i < columnNames.length;  i++ ) { %>
+          <th>
+            <a href="/accueil/orderBy=<%= String(columnNames[i].COLUMN_NAME)%>">
+              <%= columnNames[i].COLUMN_NAME %>
+            </a>
+          </th>
+          <% } %>
+          <th>Actions</th>
+        </tr>
+
+        <% for (var i = 0; i < peopleNames.length;  i++ ) { %>
+        <tr>
+          <% for (var j = 1; j < columnNames.length;  j++ ) { %>
+          <td>
+            <%= peopleNames[i][columnNames[j].COLUMN_NAME] %>
+          </td>
+          <% } %>
+
+          <td>
+            <a href="#">
+              <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                <path d="M 20.71 7.04 c 0.39 -0.39 0.39 -1.02 0 -1.41 l -2.34 -2.34 c -0.2 -0.2 -0.45 -0.29 -0.71 -0.29 s -0.51 0.1 -0.7 0.29 l -1.83 1.83 l 3.75 3.75 l 1.83 -1.83 Z M 3 17.25 V 21 h 3.75 L 17.81 9.94 l -3.75 -3.75 L 3 17.25 Z M 5.92 19 H 5 v -0.92 l 9.06 -9.06 l 0.92 0.92 L 5.92 19 Z">
+                </path>
+              </svg>
+            </a>
+            <a href="/<%= peopleNames[i].id%>/removeContact">
+              <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                <path d="M 12 4 c -4.41 0 -8 3.59 -8 8 s 3.59 8 8 8 s 8 -3.59 8 -8 s -3.59 -8 -8 -8 Z m 4 10.59 L 14.59 16 L 12 13.41 L 9.41 16 L 8 14.59 L 10.59 12 L 8 9.41 L 9.41 8 L 12 10.59 L 14.59 8 L 16 9.41 L 13.41 12 L 16 14.59 Z">
+                </path>
+              </svg>
+            </a>
+          </td>
+        </tr>
+        <% } %>
+
+      </table>
+    </div>
+
+
+  </main>
+
+
+  <%- include('footer.ejs'); -%>
+
+
+
+
+</body>
+
+</html>

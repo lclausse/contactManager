@@ -1,0 +1,136 @@
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 280px;
+  background-color: #E2A454;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+nav ul .logoContainer {
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav ul .logoContainer .logo {
+  height: auto;
+  width: 15%;
+  padding: 40px 0 10px 0;
+}
+
+nav li a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav li a .iconContainer {
+  height: 30px;
+  width: 60px;
+}
+
+nav li a.active {}
+
+nav li a:hover:not(:active) {
+  background-color: #C88022;
+}
+
+#signOutId {
+  font-size: 15px;
+  justify-content: center;
+  margin-top: 40px;
+  text-transform: uppercase;
+}
+
+#signOutId:hover:not(:active) {
+  background-color: #C88022;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+main {
+  margin-left: 280px;
+  padding: 0;
+  background-color: rgb(250, 250, 250);
+}
+
+main h1 {
+  font-size: 20px;
+  margin: 0;
+  padding: 20px 10px 20px 20px;
+  background-color: #f5f3f0;
+  color: grey;
+  border-bottom-style: none;
+  box-shadow: 0 2px 10px #888888;
+}
+
+main .logoAddContainer {
+  height: 50px;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+main .logoAddContainer img {
+  height: 70%;
+  width: auto;
+  margin: 0;
+  padding: 0 0 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main .tableContainer {
+  margin: 0 20px 20px 20px;
+}
+
+main .tableContainer table {
+  width: 100%;
+  padding: 2px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(166, 166, 166, 0.1);
+  border-collapse: collapse;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px #888888;
+}
+
+main .tableContainer table th {
+  padding: 20px;
+  border-bottom: 1px solid rgba(166, 166, 166, 0.7);
+  text-align: center;
+}
+
+main .tableContainer table td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(166, 166, 166, 0.3);
+  text-align: center;
+}
+
+main .tableContainer table td .icon {
+  height: 1.2em;
+}
+
+main .tableContainer table td a {
+  text-decoration: none;
+}
+
+footer {
+  margin-left: 280px;
+  padding: 0;
+  background-color: rgb(250, 250, 250);
+}

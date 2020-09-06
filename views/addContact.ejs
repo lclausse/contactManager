@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" type="text/css" href="../css/accueil.css">
+  <link rel="stylesheet" type="text/css" href="../css/addContact.css">
+  <script src="./././js/transformLabel.js"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Gestion de contacts" />
+  <meta property="og:locale" content="fr_BE" />
+  <meta property="og:type" content="Contacts manager" />
+  <meta property="og:title" content="Contacts" />
+  <meta property="og:description" content="Gestion de contacts">
+  <meta property="og:url" content="" />
+  <meta property="og:site_name" content="CONTACTS" />
+  <meta property="og:image" content="img/logo.png" />
+
+  <meta name="theme-color" content="#ffffff">
+  <title>Carnet d'adresses </title>
+
+</head>
+
+<body>
+
+  <%- include('navBar.ejs'); -%>
+
+  <main>
+    <h1>Ajouter contact</h1>
+    <div class="formPage">
+      <div class="formContainer">
+
+        <form class="" action="/addContact" method="post">
+
+          <% for (var i = 1; i < columnNames.length;  i++ ) { %>
+          <% let col = columnNames[i].COLUMN_NAME %>
+          <% let IdLabel = String(col) + "Label" %>
+          <% let IdInput = String(col) + "Input" %>
+          <div class="inputContainer">
+            <label class="inputLabel" id="<%= IdLabel %>" for="<%= col %>">
+              <%= String(col) %><span>&thinsp;*</span>
+            </label>
+            <input type="text" id="<%= IdInput %>" name="<%=String(col) %>" value="" onfocus="transformLabel('<%= IdLabel %>')" onblur="startPointLabel('<%= IdLabel %>','<%= IdInput %>')"><br><br>
+          </div>
+          <% } %>
+          <button type="submit">Ajouter</button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <%- include('footer.ejs'); -%>
+
+</body>
+
+</html>
