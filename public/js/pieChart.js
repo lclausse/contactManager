@@ -4,6 +4,32 @@ function pieChart(percent, values) {
   var canvas = document.getElementById("pieChartTel");
   var ctx = canvas.getContext("2d");
 
+  var orderedPercent = [];
+  var orderedValues = [];
+
+  for (var i = 0; i < percent.length; i++) {
+    var ind = minIndex(percent);
+    orderedPercent.unshift(percent[ind]);
+    orderedValues.unshift(values[ind]);
+    percent[ind] = Number.MAX_VALUE;
+    values[ind] = Number.MAX_VALUE;
+  }
+
+  percent = orderedPercent;
+  values = orderedValues;
+
+  function minIndex(arr) {
+    var min = Number.MAX_VALUE;
+    var minIndex = null;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] < min) {
+        min = arr[i];
+        minIndex = i;
+      }
+    }
+    return (minIndex)
+  }
+
 
 
   // Test if sum is 100%
@@ -30,20 +56,17 @@ function pieChart(percent, values) {
     var degrees = percent[i] * Math.PI * 2 / 100;
     angles.push(angles[i] + degrees)
   }
+  console.log(angles);
 
-  // Just for testing
-  for (var i = 0; i < angles.length; i++) {
-    console.log(angles[i] * 180 / Math.PI);
-  }
-  console.log('');
 
   for (var i = 0; i < angles.length - 1; i++) {
-    var color = 'rgb(' + String(70 + i*30) + ',100,100)';
+    var color = 'rgb(' + String(70 + i*30) + ',150,150)';
     ctx.fillStyle = color;
+    var halfPi = Math.PI / 2;
 
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
-    ctx.arc(centerX, centerY, r, angles[i], angles[i+1]);
+    ctx.arc(centerX, centerY, r, angles[i]-halfPi, angles[i+1]-halfPi);
     ctx.closePath();
     ctx.fill();
   }

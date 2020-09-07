@@ -29,6 +29,54 @@
   <main>
     <h1>Agenda</h1>
 
+    <a href="/addEvent">
+      <div class="logoAddContainer">
+        <img src="../img/add.png" alt="">
+      </div>
+    </a>
+
+    <div class="tableContainer">
+      <table>
+
+        <tr>
+          <% for (var i = 1; i < columnNames.length;  i++ ) { %>
+          <th>
+            <a href="/agenda/orderBy=<%= String(columnNames[i].COLUMN_NAME)%>">
+              <%= columnNames[i].COLUMN_NAME %>
+            </a>
+          </th>
+          <% } %>
+          <th>Actions</th>
+        </tr>
+
+        <% for (var i = 0; i < eventInfos.length;  i++ ) { %>
+        <tr>
+          <% for (var j = 1; j < columnNames.length;  j++ ) { %>
+          <td>
+            <%= eventInfos[i][columnNames[j].COLUMN_NAME] %>
+          </td>
+          <% } %>
+
+          <td>
+            <a href="#">
+              <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                <path d="M 20.71 7.04 c 0.39 -0.39 0.39 -1.02 0 -1.41 l -2.34 -2.34 c -0.2 -0.2 -0.45 -0.29 -0.71 -0.29 s -0.51 0.1 -0.7 0.29 l -1.83 1.83 l 3.75 3.75 l 1.83 -1.83 Z M 3 17.25 V 21 h 3.75 L 17.81 9.94 l -3.75 -3.75 L 3 17.25 Z M 5.92 19 H 5 v -0.92 l 9.06 -9.06 l 0.92 0.92 L 5.92 19 Z">
+                </path>
+              </svg>
+            </a>
+            <a href="/<%= eventInfos[i].idEvent%>/removeEvent">
+              <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                <path d="M 12 4 c -4.41 0 -8 3.59 -8 8 s 3.59 8 8 8 s 8 -3.59 8 -8 s -3.59 -8 -8 -8 Z m 4 10.59 L 14.59 16 L 12 13.41 L 9.41 16 L 8 14.59 L 10.59 12 L 8 9.41 L 9.41 8 L 12 10.59 L 14.59 8 L 16 9.41 L 13.41 12 L 16 14.59 Z">
+                </path>
+              </svg>
+            </a>
+          </td>
+        </tr>
+        <% } %>
+
+      </table>
+    </div>
+
 
   </main>
 

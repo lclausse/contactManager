@@ -27,9 +27,27 @@ router.get('/addContact', (req, res) => {
   })
 })
 
-router.get('/agenda', (req, res) => {
-  res.render('agenda.ejs');
+router.get('/agenda/orderBy=:id', (req, res) => {
+  var model = require('../models/getEvents.js');
+  model(db, req.params.id, (data1, data2) => {
+    res.render('agenda.ejs', {
+      columnNames: data1,
+      eventInfos: data2
+    });
+  })
 })
+
+// Permet d'afficher les infos à remplir pour nouveau event
+router.get('/addEvent', (req, res) => {
+  var model = require('../models/getEvents.js');
+  model(db, "date", (data1, data2) => {
+    res.render('addEvent.ejs', {
+      columnNames: data1,
+      eventInfos: data2
+    });
+  })
+})
+
 
 router.get('/statistiques', (req, res) => {
   res.render('statistiques.ejs');
@@ -43,12 +61,27 @@ router.get('/parametres', (req, res) => {
   res.render('parametres.ejs');
 })
 
+
+
+
 // Permet d'ajouter un nom dans la liste
 router.post('/addContact', (req, res) => {
   var model = require('../models/addContact.js');
   model(db, req.body, (succes) => {
     if (succes) {
       res.redirect('/accueil/orderBy=nom');
+    } else {
+      res.send('Erreur dans l\'ajout de contact');
+    }
+  })
+})
+
+// Permet d'ajouter un event dans la liste
+router.post('/addEvent', (req, res) => {
+  var model = require('../models/addEvent.js');
+  model(db, req.body, (succes) => {
+    if (succes) {
+      res.redirect('/agenda/orderBy=date');
     } else {
       res.send('Erreur dans l\'ajout de contact');
     }
@@ -63,6 +96,18 @@ router.get('/:id/removeContact', (req, res) => {
       res.redirect('/accueil/orderBy=nom');
     } else {
       res.send('Erreur dans le retrait du contact');
+    }
+  })
+})
+
+// Permet d'enlever un nom de la liste
+router.get('/:id/removeEvent', (req, res) => {
+  var model = require('../models/removeEvent.js');
+  model(db, req.params.id, (succes) => {
+    if (succes) {
+      res.redirect('/agenda/orderBy=date');
+    } else {
+      res.send('Erreur dans le retrait de l\'événement');
     }
   })
 })

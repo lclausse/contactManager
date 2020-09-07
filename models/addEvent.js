@@ -4,7 +4,7 @@ module.exports = (db, data, callback) => {
   keys = Object.keys(data);
   values = Object.values(data);
 
-  var sqlMessage = "INSERT INTO `carnet` (id,"
+  var sqlMessage = "INSERT INTO `events` (idEvent,"
   for (var i = 0; i < keys.length; i++) {
     sqlMessage = sqlMessage.concat(String(keys[i]) + ",");
   }
