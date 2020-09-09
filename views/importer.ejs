@@ -5,7 +5,7 @@
   <link rel="stylesheet" type="text/css" href="../css/main.css">
   <link rel="stylesheet" type="text/css" href="../css/accueil.css">
 
-  <script src="./././js/jsonToDb.js"></script>
+  <script src="./././js/import.js"></script>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,8 +36,17 @@
 
 
     <h1>Importer</h1>
-    <button onclick="readTextFile('../import/tel.json', function(text) { var data=JSON.parse(text); console.log(data); })">Importer</button>
-    <button onclick="readTextFile('../import/friends.json', function(text) { var data=JSON.parse(text); console.log(data); })">Importer</button>
+    <!-- <button onclick="readTextFile('../import/tel.json', function(text) { var data=JSON.parse(text); console.log(data); })">Importer</button>
+    -->
+
+    <!--
+    <form action="/addContacts" method="post" enctype="multipart/form-data">
+      Select a file: <input type="file" id="myFile">
+      <button type="submit">Process</button>
+    </form>
+    -->
+
+
 
 
   </main>

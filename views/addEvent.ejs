@@ -35,8 +35,9 @@
 
         <form class="" action="/addEvent" method="post">
 
-          <% for (var i = 1; i < columnNames.length;  i++ ) { %>
-          <% let col = columnNames[i].COLUMN_NAME %>
+          <!--
+          <% for (var i = 1; i < columnNamesEvents.length;  i++ ) { %>
+          <% let col = columnNamesEvents[i].COLUMN_NAME %>
           <% let IdLabel = String(col) + "Label" %>
           <% let IdInput = String(col) + "Input" %>
           <div class="inputContainer">
@@ -46,6 +47,50 @@
             <input type="text" id="<%= IdInput %>" name="<%=String(col) %>" value="" onfocus="transformLabel('<%= IdLabel %>')" onblur="startPointLabel('<%= IdLabel %>','<%= IdInput %>')"><br><br>
           </div>
           <% } %>
+          -->
+
+          <!-- -->
+          <div class="inputContainer">
+            <label class="inputLabel" id="idPeopleLabel" for="idPeople">
+              idPeople<span>&thinsp;*</span>
+            </label>
+
+            <datalist id="listOfNames">
+              <% for (var i = 0; i < contactInfos.length;  i++ ) { %>
+              <% let val = String(contactInfos[i].nom) + " " + String(contactInfos[i].prenom) %>
+              <option value="<%= val %>">
+                <% } %>
+            </datalist>
+
+            <input type="text" list="listOfNames" autocomplete="off" id="idPeopleInput" name="idPeople" value="" onfocus="transformLabel('idPeopleLabel')" onblur="startPointLabel('idPeopleLabel','idPeopleInput')"><br><br>
+          </div>
+
+          <!-- -->
+          <div class="inputContainer">
+            <%
+              n =  new Date();
+              y = n.getFullYear();
+              m = n.getMonth() + 1;
+              if (m < 10) {
+                m = "0" + String(m);
+              }
+              d = n.getDate();
+              if (d < 10) {
+                d = "0" + String(d);
+              }
+              let dateToday = (y + "-" + m + "-" + d);
+             %>
+            <input type="date" value="<%=dateToday %>" id="dateInput" name="date"><br><br>
+          </div>
+
+          <!-- -->
+          <div class="inputContainer">
+            <label class="inputLabel" id="descriptionLabel" for="description">
+              description<span>&thinsp;*</span>
+            </label>
+            <input type="text" autocomplete="off" id="descriptionInput" name="description" value="" onfocus="transformLabel('descriptionLabel')" onblur="startPointLabel('descriptionLabel','descriptionInput')"><br><br>
+          </div>
+
           <button type="submit">Ajouter</button>
         </form>
       </div>

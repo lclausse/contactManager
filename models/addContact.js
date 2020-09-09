@@ -1,4 +1,5 @@
 
+// One contact at a time
 module.exports = (db, data, callback) => {
 
   keys = Object.keys(data);

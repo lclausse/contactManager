@@ -48,6 +48,10 @@
   width: 100%;
 }
 
+.formPage .formContainer form .inputContainer input[type=date] {
+  color: rgba(0, 0, 0, 0.54);
+}
+
 .formPage .formContainer form .inputContainer input:focus {
   border-width: 2px;
   padding: 19px 0 19px 10px;

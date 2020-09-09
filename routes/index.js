@@ -39,12 +39,17 @@ router.get('/agenda/orderBy=:id', (req, res) => {
 
 // Permet d'afficher les infos à remplir pour nouveau event
 router.get('/addEvent', (req, res) => {
-  var model = require('../models/getEvents.js');
-  model(db, "date", (data1, data2) => {
-    res.render('addEvent.ejs', {
-      columnNames: data1,
-      eventInfos: data2
-    });
+  var modelEvents = require('../models/getEvents.js');
+  var modelContacts = require('../models/getContacts.js');
+  modelEvents(db, "date", (data1, data2) => {
+    modelContacts(db, "nom", (data3, data4) => {
+      res.render('addEvent.ejs', {
+        columnNamesEvents: data1,
+        eventInfos: data2,
+        columnNamesContacts: data3,
+        contactInfos: data4
+      });
+    })
   })
 })
 
@@ -70,6 +75,18 @@ router.post('/addContact', (req, res) => {
   model(db, req.body, (succes) => {
     if (succes) {
       res.redirect('/accueil/orderBy=nom');
+    } else {
+      res.send('Erreur dans l\'ajout de contact');
+    }
+  })
+})
+
+// Permet d'ajouter des noms dans la liste
+router.post('/addContacts', (req, res) => {
+  var model = require('../models/addContacts.js');
+  model(db, req.body, (succes) => {
+    if (succes) {
+      res.redirect('/importer');
     } else {
       res.send('Erreur dans l\'ajout de contact');
     }
