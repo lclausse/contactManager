@@ -39,12 +39,18 @@
     <!-- <button onclick="readTextFile('../import/tel.json', function(text) { var data=JSON.parse(text); console.log(data); })">Importer</button>
     -->
 
-    <!--
-    <form action="/addContacts" method="post" enctype="multipart/form-data">
-      Select a file: <input type="file" id="myFile">
+
+    <!-- -->
+    <form action="/addContacts" method="post">
+      Select a file: <input name="fileInput" type="file" id="myFile">
+      <% var columns = [] %>
+      <% for (var i = 1; i < columnNames.length;  i++ ) { %>
+      <% columns.push(columnNames[i].COLUMN_NAME) %>
+      <% } %>
+      <input type="hidden" name="columnsHidden" value="<%= columns%>">
       <button type="submit">Process</button>
     </form>
-    -->
+
 
 
 

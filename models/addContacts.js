@@ -1,63 +1,100 @@
 
+
+
+
 // Multiple contacts
-module.exports = (db, data, callback) => {
+module.exports = (db, file, callback) => {
+  var fs = require('fs');
 
-  keys = Object.keys(data);
-  values = Object.values(data);
+  filePath = './public/import/' + String(file.fileInput);
+  sqlCategories = file.columnsHidden.split(",");
 
-  var sqlMessage = "INSERT INTO `carnet` (id,"
-  for (var i = 0; i < keys.length; i++) {
-    sqlMessage = sqlMessage.concat(String(keys[i]) + ",");
-  }
-  sqlMessage = sqlMessage.substring(0, sqlMessage.length - 1);
-  sqlMessage = sqlMessage.concat(") VALUES (NULL,");
-  for (var i = 0; i < values.length; i++) {
-    sqlMessage = sqlMessage.concat("'" + String(values[i]) + "',");
-  }
-  sqlMessage = sqlMessage.substring(0, sqlMessage.length - 1);
-  sqlMessage = sqlMessage.concat(")");
+  fs.readFile(filePath, 'utf8', function(err, data) {
+      if (err) throw err;
+      lines = data.split("\n");
+      categories = lines[0].split(",");
 
-  db.query(sqlMessage, (err, data) => {
-    if (err) {
-      console.log(err);
-      callback(false);
-    } else {
-      callback(true);
-    }
-  })
-}
-
-
-function readCSV(){
-  var file = document.querySelector('#myFile').files[0];
-  var reader = new FileReader();
-  reader.readAsText(file);
-
-  //if you need to read a csv file with a 'ISO-8859-1' encoding
-  /*reader.readAsText(file,'ISO-8859-1');*/
-
-  //When the file finish load
-  reader.onload = function(event) {
-
-    //get the file.
-    var csv = event.target.result;
-
-    //split and get the rows in an array
-    var rows = csv.split('\n');
-
-    colsNames = rows[0].split(',');
-
-    //move line by line
-    for (var i = 1; i < rows.length; i++) {
-      //split by separator (,) and get the columns
-      cols = rows[i].split(',');
-      console.log(cols);
-      //move column by column
-      for (var j = 0; j < cols.length; j++) {
-        /*the value of the current column.
-        Do whatever you want with the value*/
-        var value = cols[j];
+      // Review style of categories for correct SQL injection
+      for (var i = 0; i < categories.length; i++) {
+        categories[i] = categories[i].toLowerCase();
+        if (categories[i] === 'last name') {
+          categories[i] = 'nom';
+        }
+        else if (categories[i] === 'first name') {
+          categories[i] = 'prenom';
+        }
+        else if (categories[i] === 'notes') {
+          categories[i] = 'surnom';
+        }
+        else if (categories[i].includes('phone')) {
+          categories[i] = 'tel';
+        }
+        else if (categories[i].includes('e-mail address')) {
+          categories[i] = 'email';
+        }
+        else if (categories[i] === 'birthday') {
+          categories[i] = 'naissance';
+        }
+        else if (categories[i] === 'company') {
+          categories[i] = 'origine';
+        }
+        else {
+          categories[i] = "";
+        }
       }
-    }
-  }
+
+      // Start of SQL message
+      var sqlMessage = "INSERT INTO `carnet` (id,"
+      for (var i = 0; i < sqlCategories.length; i++) {
+        sqlMessage = sqlMessage.concat(String(sqlCategories[i]) + ",");
+      }
+      sqlMessage = sqlMessage.substring(0, sqlMessage.length - 1);
+      sqlMessage = sqlMessage.concat(") VALUES ");
+
+      // Loop through the contacts
+      for (var i = 1; i < lines.length; i++) {
+        contactData = lines[i].split(",");
+        orderedData = Array(sqlCategories.length).fill(null);
+
+        for (var j = 0; j < contactData.length; j++) {
+          if (contactData[j] != "") {
+            for (var k = 0; k < sqlCategories.length; k++) {
+              if (categories[j] == sqlCategories[k]) {
+                orderedData[k] = contactData[j];
+              }
+            }
+          }
+        }
+        // SQL message for each contact
+        sqlMessage = sqlMessage.concat("(NULL,");
+        for (var j = 0; j < orderedData.length; j++) {
+          if (orderedData[j] == null) {
+            sqlMessage = sqlMessage.concat('NULL,');
+          } else {
+            sqlMessage = sqlMessage.concat("'" + String(orderedData[j]) + "',");
+          }
+        }
+        sqlMessage = sqlMessage.substring(0, sqlMessage.length - 1);
+        sqlMessage = sqlMessage.concat("),");
+      }
+
+      // To remove the last coma
+      sqlMessage = sqlMessage.substring(0, sqlMessage.length - 1);
+
+      console.log(sqlMessage);
+
+
+
+
+
+      db.query(sqlMessage, (err, data) => {
+        if (err) {
+          console.log(err);
+          callback(false);
+        } else {
+          callback(true);
+        }
+      })
+
+  });
 }

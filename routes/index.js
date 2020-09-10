@@ -59,7 +59,13 @@ router.get('/statistiques', (req, res) => {
 })
 
 router.get('/importer', (req, res) => {
-  res.render('importer.ejs');
+  var model = require('../models/getContacts.js');
+  model(db, "nom", (data1, data2) => {
+    res.render('importer.ejs', {
+      columnNames: data1,
+    });
+  })
+
 })
 
 router.get('/parametres', (req, res) => {
