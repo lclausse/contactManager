@@ -18,11 +18,3 @@ module.exports.logging = (req,res,next)=>{
 	})
 	next();
 }
-// Middleware qui configure les headers
-module.exports.setHeaders = (req, res, next)=>{
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	res.setHeader('Access-Control-Allow-Headers', '*');
-	res.setHeader('Access-Control-Max-Age', 60 * 60 * 24 * 365);
-	next();
-}
